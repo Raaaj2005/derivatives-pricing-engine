@@ -5,7 +5,7 @@
 [![Tests](https://img.shields.io/badge/tests-9%20passing-brightgreen)](#testing)
 [![License](https://img.shields.io/badge/license-MIT-lightgrey)](#license)
 
-A from-scratch derivatives pricing library — no `QuantLib`, no pricing wrappers. Every formula is implemented directly from the underlying math and validated against known textbook values and internal consistency checks (put-call parity, Monte Carlo convergence to closed-form, implied-vol round-trips).
+A from-scratch derivatives pricing library, no `QuantLib`, no pricing wrappers. Every formula is implemented directly from the underlying math and validated against known textbook values and internal consistency checks (put-call parity, Monte Carlo convergence to closed-form, implied-vol round-trips).
 
 Built to understand *how* option pricing actually works under the hood, not just to call a library that does it.
 
@@ -71,8 +71,8 @@ Greeks (Black-Scholes):
   rho   : +0.20931
 
 If the market quotes this call at 5.4010 (5% above BS fair value),
-the implied volatility is 22.9140% vs. our input of 22.0000%
-— a rough proxy for a volatility 'skew' signal.
+the implied volatility is 22.9140% vs. our input of 22.0000%, 
+a rough proxy for a volatility 'skew' signal.
 ```
 </details>
 
@@ -81,7 +81,7 @@ the implied volatility is 22.9140% vs. our input of 22.0000%
 The Streamlit app lets you move S, K, T, r, and σ with sliders and see, live:
 
 - Black-Scholes price side-by-side with a Monte Carlo estimate (with its 95% confidence interval, so you can see simulation error shrink as `n_sims` grows)
-- The Asian option price for comparison — always cheaper than the equivalent European, since averaging the path reduces payoff variance
+- The Asian option price for comparison, always cheaper than the equivalent European, since averaging the path reduces payoff variance
 - A full Greeks table
 - A payoff-vs-current-price diagram
 - Delta and Gamma plotted across a range of spot prices
@@ -106,7 +106,7 @@ C  = S·N(d1) - K·e^(-rT)·N(d2)
 S_t = S_0 · exp[ (r - σ²/2)·t + σ·W_t ]
 ```
 
-**Implied volatility** is solved by inverting Black-Scholes: given a market price, find the σ that reproduces it. Newton-Raphson does this in a handful of iterations using Vega as the derivative — except when Vega is near zero (deep ITM/OTM), where Newton-Raphson can diverge. In that case the solver falls back to bisection, which is slower but guaranteed to converge.
+**Implied volatility** is solved by inverting Black-Scholes: given a market price, find the σ that reproduces it. Newton-Raphson does this in a handful of iterations using Vega as the derivative, except when Vega is near zero (deep ITM/OTM), where Newton-Raphson can diverge. In that case the solver falls back to bisection, which is slower but guaranteed to converge.
 
 ## Project structure
 
@@ -147,10 +147,10 @@ pytest tests/ -v
 
 A few decisions worth knowing if this comes up in conversation:
 
-- **Antithetic variates over other variance-reduction techniques.** Simple to implement correctly, and it directly attacks the main source of MC noise here — sampling error in the first moment of the standard normal draws — without needing a control variate model.
+- **Antithetic variates over other variance-reduction techniques.** Simple to implement correctly, and it directly attacks the main source of MC noise here, sampling error in the first moment of the standard normal draws, without needing a control variate model.
 - **Vega threshold for the Newton-Raphson→bisection switch is deliberately conservative (`1e-8`).** Deep ITM/OTM options can have Newton-Raphson overshoot badly since the price surface is nearly flat in σ there; bisection trades speed for a convergence guarantee.
-- **Theta is reported per calendar day, Vega and Rho per 1% move** — matching how they're typically quoted on a trading desk, rather than the raw per-unit mathematical derivative.
-- **No external pricing libraries** (e.g. QuantLib) — the point of this project was to implement the math directly, not to wrap an existing solution.
+- **Theta is reported per calendar day, Vega and Rho per 1% move**, matching how they're typically quoted on a trading desk, rather than the raw per-unit mathematical derivative.
+- **No external pricing libraries** (e.g. QuantLib), the point of this project was to implement the math directly, not to wrap an existing solution.
 
 ## Possible extensions
 
@@ -162,8 +162,9 @@ Ideas noted but not yet built:
 
 ---
 
-## License
+## Author Details
 
-MIT — use it, fork it, extend it.
-
-*Built as a personal project to strengthen derivatives-pricing fundamentals ahead of interviews in the space.*
+**Name:** Raj Fatehveer Singh Brar
+**Roll No.:** 102317090
+**Email ID:** rbrar_be23@thapar.edu
+**University:** Thapar Institute of Engineering and Technology

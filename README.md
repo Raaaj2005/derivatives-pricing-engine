@@ -164,7 +164,7 @@ Ideas noted but not yet built:
 
 ## Author Details
 
-**Name:** Raj Fatehveer Singh Brar
-**Roll No.:** 102317090
-**Email ID:** rbrar_be23@thapar.edu
+**Name:** Raj Fatehveer Singh Brar<br>
+**Roll No.:** 102317090<br>
+**Email ID:** rbrar_be23@thapar.edu<br>
 **University:** Thapar Institute of Engineering and Technology
